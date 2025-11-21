@@ -1,0 +1,39 @@
+name = "perfex-native-poc"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# D1 Database Binding
+# Default (Development)
+[[d1_databases]]
+binding = "DB"
+database_name = "perfex-dev-db"
+database_id = "cdbd3160-393a-4e82-8840-0d6e85af7cee"
+
+# Staging
+[env.staging]
+name = "perfex-native-staging"
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "perfex-staging-db"
+database_id = "e66a50f7-881d-4b6c-986a-704f3e475800"
+
+# Production
+[env.production]
+name = "perfex-native-prod"
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "perfex-prod-db"
+database_id = "16a3c688-43c9-4807-818b-a5cab432134b"
+
+# Shared Queue Config (can be overridden per env if needed)
+[[queues.producers]]
+queue = "perfex-jobs"
+binding = "JOBS_QUEUE"
+
+[[queues.consumers]]
+queue = "perfex-jobs"
+max_batch_size = 10
+max_batch_timeout = 5
+
+[triggers]
+crons = ["0 0 * * *"]
