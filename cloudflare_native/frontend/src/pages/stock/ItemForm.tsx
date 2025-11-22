@@ -5,12 +5,12 @@ export default function ItemForm() {
         <FormView
             module="stock"
             doctype="item"
-            title="Item"
+            title="modules.item"
             fields={[
-                { name: "item_code", label: "Item Code", type: "text", required: true },
-                { name: "item_name", label: "Item Name", type: "text" },
-                { name: "valuation_rate", label: "Valuation Rate", type: "number" },
-                { name: "description", label: "Description", type: "text" },
+                { name: "item_code", label: "fields.item_code", type: "text", required: true },
+                { name: "item_name", label: "fields.item_name", type: "text" },
+                { name: "valuation_rate", label: "fields.valuation_rate", type: "number" },
+                { name: "description", label: "fields.description", type: "text" },
             ]}
         />
     );

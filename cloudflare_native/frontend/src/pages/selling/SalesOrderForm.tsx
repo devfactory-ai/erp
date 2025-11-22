@@ -5,12 +5,12 @@ export default function SalesOrderForm() {
         <FormView
             module="selling"
             doctype="sales-order"
-            title="Sales Order"
+            title="modules.sales_order"
             fields={[
-                { name: "customer", label: "Customer", type: "text", required: true },
-                { name: "transaction_date", label: "Date", type: "date", required: true },
-                { name: "delivery_date", label: "Delivery Date", type: "date" },
-                { name: "grand_total", label: "Grand Total", type: "number" },
+                { name: "customer", label: "fields.customer", type: "text", required: true },
+                { name: "transaction_date", label: "fields.date", type: "date", required: true },
+                { name: "delivery_date", label: "fields.delivery_date", type: "date" },
+                { name: "grand_total", label: "fields.grand_total", type: "number" },
             ]}
         />
     );

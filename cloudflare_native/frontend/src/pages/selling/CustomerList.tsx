@@ -5,12 +5,12 @@ export default function CustomerList() {
         <ListView
             module="selling"
             doctype="customer"
-            title="Customers"
+            title="modules.customer"
             columns={[
-                { key: "name", label: "ID" },
-                { key: "customer_name", label: "Customer Name" },
-                { key: "customer_type", label: "Type" },
-                { key: "email_id", label: "Email" },
+                { key: "name", label: "fields.id" },
+                { key: "customer_name", label: "fields.name" },
+                { key: "customer_type", label: "fields.type" },
+                { key: "email_id", label: "fields.email" },
             ]}
         />
     );

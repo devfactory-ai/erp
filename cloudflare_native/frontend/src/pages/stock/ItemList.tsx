@@ -5,12 +5,12 @@ export default function ItemList() {
         <ListView
             module="stock"
             doctype="item"
-            title="Items"
+            title="modules.item"
             columns={[
-                { key: "name", label: "ID" },
-                { key: "item_code", label: "Item Code" },
-                { key: "item_name", label: "Item Name" },
-                { key: "valuation_rate", label: "Rate" },
+                { key: "name", label: "fields.id" },
+                { key: "item_code", label: "fields.item_code" },
+                { key: "item_name", label: "fields.item_name" },
+                { key: "valuation_rate", label: "fields.rate" },
             ]}
         />
     );

@@ -5,12 +5,12 @@ export default function CustomerForm() {
         <FormView
             module="selling"
             doctype="customer"
-            title="Customer"
+            title="modules.customer"
             fields={[
-                { name: "customer_name", label: "Customer Name", type: "text", required: true },
-                { name: "customer_type", label: "Customer Type", type: "text" },
-                { name: "email_id", label: "Email", type: "email" },
-                { name: "mobile_no", label: "Mobile No", type: "text" },
+                { name: "customer_name", label: "fields.name", type: "text", required: true },
+                { name: "customer_type", label: "fields.type", type: "text" },
+                { name: "email_id", label: "fields.email", type: "email" },
+                { name: "mobile_no", label: "fields.mobile", type: "text" },
             ]}
         />
     );
