@@ -67,18 +67,21 @@ Add the following Repository Secrets:
 
 ## 3. Manual Deployment (Fallback)
 
-You can still deploy manually using the helper script, but it defaults to `dev` or standard deployment. For specific environments:
+You can deploy manually using the helper script `./deploy.sh` which guides you through the process.
+
+Or run commands individually:
 
 ```bash
-# Deploy Backend
+# 1. Deploy Backend
 wrangler deploy --env staging
-wrangler deploy --env production
 
-# Deploy Frontend
+# 2. Build Frontend (Inject API URL)
 cd frontend
-npm run build
+# Replace with your actual Worker URL
+VITE_API_URL=https://perfex-native-staging.YOUR-SUBDOMAIN.workers.dev/api npm run build
+
+# 3. Deploy Frontend
 wrangler pages deploy dist --project-name perfex-frontend-staging
-wrangler pages deploy dist --project-name perfex-frontend-prod
 ```
 
 ## 4. Verification

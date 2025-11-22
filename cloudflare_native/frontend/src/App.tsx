@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 import Dashboard from "./pages/Dashboard";
 
@@ -89,12 +89,16 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/onboarding" element={<Onboarding />} />
+
+                {/* Redirects */}
+                <Route path="/dashboard" element={<Navigate to="/app/dashboard" replace />} />
+
                 <Route path="/app" element={<Layout />}>
                     <Route path="dashboard" element={<Dashboard />} />
 
                     {/* Selling Module */}
                     <Route path="selling">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/selling/customer" className="text-primary underline">Customer</a>, <a href="/selling/quotation" className="text-primary underline">Quotation</a>, <a href="/selling/sales-order" className="text-primary underline">Sales Order</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/selling/customer" className="text-primary underline">Customer</Link>, <Link to="/app/selling/quotation" className="text-primary underline">Quotation</Link>, <Link to="/app/selling/sales-order" className="text-primary underline">Sales Order</Link></div>} />
                         <Route path="customer" element={<CustomerList />} />
                         <Route path="customer/new" element={<CustomerForm />} />
                         <Route path="quotation" element={<QuotationList />} />
@@ -105,7 +109,7 @@ function App() {
 
                     {/* Buying Module */}
                     <Route path="buying">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/buying/supplier" className="text-primary underline">Supplier</a>, <a href="/buying/purchase-order" className="text-primary underline">Purchase Order</a>, <a href="/buying/purchase-receipt" className="text-primary underline">Purchase Receipt</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/buying/supplier" className="text-primary underline">Supplier</Link>, <Link to="/app/buying/purchase-order" className="text-primary underline">Purchase Order</Link>, <Link to="/app/buying/purchase-receipt" className="text-primary underline">Purchase Receipt</Link></div>} />
                         <Route path="supplier" element={<SupplierList />} />
                         <Route path="supplier/new" element={<SupplierForm />} />
                         <Route path="purchase-order" element={<PurchaseOrderList />} />
@@ -116,7 +120,7 @@ function App() {
 
                     {/* Stock Module */}
                     <Route path="stock">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/stock/item" className="text-primary underline">Item</a>, <a href="/stock/delivery-note" className="text-primary underline">Delivery Note</a>, <a href="/stock/stock-entry" className="text-primary underline">Stock Entry</a>, <a href="/stock/material-request" className="text-primary underline">Material Request</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/stock/item" className="text-primary underline">Item</Link>, <Link to="/app/stock/delivery-note" className="text-primary underline">Delivery Note</Link>, <Link to="/app/stock/stock-entry" className="text-primary underline">Stock Entry</Link>, <Link to="/app/stock/material-request" className="text-primary underline">Material Request</Link></div>} />
                         <Route path="item" element={<ItemList />} />
                         <Route path="item/new" element={<ItemForm />} />
                         <Route path="delivery-note" element={<DeliveryNoteList />} />
@@ -129,7 +133,7 @@ function App() {
 
                     {/* Accounts Module */}
                     <Route path="accounts">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/accounts/sales-invoice" className="text-primary underline">Sales Invoice</a>, <a href="/accounts/purchase-invoice" className="text-primary underline">Purchase Invoice</a>, <a href="/accounts/journal-entry" className="text-primary underline">Journal Entry</a>, <a href="/accounts/payment-entry" className="text-primary underline">Payment Entry</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/accounts/sales-invoice" className="text-primary underline">Sales Invoice</Link>, <Link to="/app/accounts/purchase-invoice" className="text-primary underline">Purchase Invoice</Link>, <Link to="/app/accounts/journal-entry" className="text-primary underline">Journal Entry</Link>, <Link to="/app/accounts/payment-entry" className="text-primary underline">Payment Entry</Link></div>} />
                         <Route path="sales-invoice" element={<SalesInvoiceList />} />
                         <Route path="sales-invoice/new" element={<SalesInvoiceForm />} />
                         <Route path="purchase-invoice" element={<PurchaseInvoiceList />} />
@@ -142,21 +146,21 @@ function App() {
 
                     {/* CRM Module */}
                     <Route path="crm">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/crm/lead" className="text-primary underline">Lead</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/crm/lead" className="text-primary underline">Lead</Link></div>} />
                         <Route path="lead" element={<LeadList />} />
                         <Route path="lead/new" element={<LeadForm />} />
                     </Route>
 
                     {/* Projects Module */}
                     <Route path="projects">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/projects/project" className="text-primary underline">Project</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/projects/project" className="text-primary underline">Project</Link></div>} />
                         <Route path="project" element={<ProjectList />} />
                         <Route path="project/new" element={<ProjectForm />} />
                     </Route>
 
                     {/* Manufacturing Module */}
                     <Route path="manufacturing">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/manufacturing/work-order" className="text-primary underline">Work Order</a>, <a href="/manufacturing/job-card" className="text-primary underline">Job Card</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/manufacturing/work-order" className="text-primary underline">Work Order</Link>, <Link to="/app/manufacturing/job-card" className="text-primary underline">Job Card</Link></div>} />
                         <Route path="work-order" element={<WorkOrderList />} />
                         <Route path="work-order/new" element={<WorkOrderForm />} />
                         <Route path="job-card" element={<JobCardList />} />
@@ -165,7 +169,7 @@ function App() {
 
                     {/* Assets Module */}
                     <Route path="assets">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/assets/asset" className="text-primary underline">Asset</a>, <a href="/assets/asset-category" className="text-primary underline">Asset Category</a>, <a href="/assets/asset-movement" className="text-primary underline">Asset Movement</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/assets/asset" className="text-primary underline">Asset</Link>, <Link to="/app/assets/asset-category" className="text-primary underline">Asset Category</Link>, <Link to="/app/assets/asset-movement" className="text-primary underline">Asset Movement</Link></div>} />
                         <Route path="asset" element={<div>Asset List (Placeholder)</div>} />
                         <Route path="asset-category" element={<AssetCategoryList />} />
                         <Route path="asset-category/new" element={<AssetCategoryForm />} />
@@ -175,21 +179,21 @@ function App() {
 
                     {/* Maintenance Module */}
                     <Route path="maintenance">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/maintenance/maintenance-schedule" className="text-primary underline">Maintenance Schedule</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/maintenance/maintenance-schedule" className="text-primary underline">Maintenance Schedule</Link></div>} />
                         <Route path="maintenance-schedule" element={<MaintenanceScheduleList />} />
                         <Route path="maintenance-schedule/new" element={<MaintenanceScheduleForm />} />
                     </Route>
 
                     {/* Support Module */}
                     <Route path="support">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/support/issue" className="text-primary underline">Issue</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/support/issue" className="text-primary underline">Issue</Link></div>} />
                         <Route path="issue" element={<IssueList />} />
                         <Route path="issue/new" element={<IssueForm />} />
                     </Route>
 
                     {/* Quality Management Module */}
                     <Route path="quality-management">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/quality-management/quality-goal" className="text-primary underline">Quality Goal</a>, <a href="/quality-management/quality-inspection" className="text-primary underline">Quality Inspection</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/quality-management/quality-goal" className="text-primary underline">Quality Goal</Link>, <Link to="/app/quality-management/quality-inspection" className="text-primary underline">Quality Inspection</Link></div>} />
                         <Route path="quality-goal" element={<div>Quality Goal List (Placeholder)</div>} />
                         <Route path="quality-inspection" element={<QualityInspectionList />} />
                         <Route path="quality-inspection/new" element={<QualityInspectionForm />} />
@@ -197,7 +201,7 @@ function App() {
 
                     {/* Subcontracting Module */}
                     <Route path="subcontracting">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/subcontracting/subcontracting-order" className="text-primary underline">Subcontracting Order</a>, <a href="/subcontracting/subcontracting-receipt" className="text-primary underline">Subcontracting Receipt</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/subcontracting/subcontracting-order" className="text-primary underline">Subcontracting Order</Link>, <Link to="/app/subcontracting/subcontracting-receipt" className="text-primary underline">Subcontracting Receipt</Link></div>} />
                         <Route path="subcontracting-order" element={<div>Subcontracting Order List (Placeholder)</div>} />
                         <Route path="subcontracting-receipt" element={<SubcontractingReceiptList />} />
                         <Route path="subcontracting-receipt/new" element={<SubcontractingReceiptForm />} />
@@ -205,11 +209,20 @@ function App() {
 
                     {/* Setup Module */}
                     <Route path="setup">
-                        <Route index element={<div className="p-4">Select a DocType: <a href="/setup/company" className="text-primary underline">Company</a></div>} />
+                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/setup/company" className="text-primary underline">Company</Link></div>} />
                         <Route path="company" element={<CompanyList />} />
                         <Route path="company/new" element={<CompanyForm />} />
                     </Route>
                 </Route>
+
+                {/* 404 Route */}
+                <Route path="*" element={<div className="flex items-center justify-center h-screen">
+                    <div className="text-center">
+                        <h1 className="text-4xl font-bold mb-4">404</h1>
+                        <p className="text-xl mb-4">Page Not Found</p>
+                        <a href="/" className="text-primary underline">Go Home</a>
+                    </div>
+                </div>} />
             </Routes>
         </Router>
     );

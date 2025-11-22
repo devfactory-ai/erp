@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import todoRouter from './modules/core/todo';
 import onboardingRouter from './modules/core/onboarding_step';
 import customerRouter from './modules/selling/customer';
@@ -26,7 +27,6 @@ import salesOrderRouter from './modules/selling/sales_order';
 import purchaseOrderRouter from './modules/buying/purchase_order';
 import stockEntryRouter from './modules/stock/stock_entry';
 import communicationRouter from './modules/communication/communication';
-import subcontractingOrderRouter from './modules/subcontracting/subcontracting_order';
 import journalEntryRouter from './modules/accounts/journal_entry';
 import deliveryNoteRouter from './modules/stock/delivery_note';
 import quotationRouter from './modules/selling/quotation';
@@ -43,15 +43,13 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>();
 
 // CORS Middleware
-app.use('/api/*', async (c, next) => {
-    c.header('Access-Control-Allow-Origin', '*');
-    c.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    c.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    if (c.req.method === 'OPTIONS') {
-        return c.text('', 204);
-    }
-    await next();
-});
+app.use('/api/*', cors({
+    origin: '*',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+    exposeHeaders: ['Content-Length'],
+    maxAge: 600,
+}));
 
 // Mount Modules
 app.route('/api/core/todo', todoRouter);

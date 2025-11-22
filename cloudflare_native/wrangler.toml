@@ -25,13 +25,35 @@ binding = "DB"
 database_name = "perfex-prod-db"
 database_id = "16a3c688-43c9-4807-818b-a5cab432134b"
 
-# Shared Queue Config (can be overridden per env if needed)
+# Queue Config - Development (Default)
 [[queues.producers]]
-queue = "perfex-jobs"
+queue = "perfex-jobs-dev"
 binding = "JOBS_QUEUE"
 
 [[queues.consumers]]
-queue = "perfex-jobs"
+queue = "perfex-jobs-dev"
+max_batch_size = 10
+max_batch_timeout = 5
+
+# Queue Config - Staging
+[env.staging.queues]
+[[env.staging.queues.producers]]
+queue = "perfex-jobs-staging"
+binding = "JOBS_QUEUE"
+
+[[env.staging.queues.consumers]]
+queue = "perfex-jobs-staging"
+max_batch_size = 10
+max_batch_timeout = 5
+
+# Queue Config - Production
+[env.production.queues]
+[[env.production.queues.producers]]
+queue = "perfex-jobs-prod"
+binding = "JOBS_QUEUE"
+
+[[env.production.queues.consumers]]
+queue = "perfex-jobs-prod"
 max_batch_size = 10
 max_batch_timeout = 5
 
