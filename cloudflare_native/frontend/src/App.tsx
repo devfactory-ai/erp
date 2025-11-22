@@ -1,231 +1,215 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from "react-router-dom";
-import { Layout } from "./components/layout/Layout";
-import Dashboard from "./pages/Dashboard";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import Login from "@/pages/Login";
+import Dashboard from "@/pages/Dashboard";
+import OnboardingWizard from "@/pages/Onboarding";
 
 // Selling
-import CustomerList from "./pages/selling/CustomerList";
-import CustomerForm from "./pages/selling/CustomerForm";
-import QuotationList from "./pages/selling/QuotationList";
-import QuotationForm from "./pages/selling/QuotationForm";
-import SalesOrderList from "./pages/selling/SalesOrderList";
-import SalesOrderForm from "./pages/selling/SalesOrderForm";
+import CustomerList from "@/pages/selling/CustomerList";
+import CustomerForm from "@/pages/selling/CustomerForm";
+import QuotationList from "@/pages/selling/QuotationList";
+import QuotationForm from "@/pages/selling/QuotationForm";
+import SalesOrderList from "@/pages/selling/SalesOrderList";
+import SalesOrderForm from "@/pages/selling/SalesOrderForm";
 
 // Buying
-import SupplierList from "./pages/buying/SupplierList";
-import SupplierForm from "./pages/buying/SupplierForm";
-import PurchaseOrderList from "./pages/buying/PurchaseOrderList";
-import PurchaseOrderForm from "./pages/buying/PurchaseOrderForm";
-import PurchaseReceiptList from "./pages/buying/PurchaseReceiptList";
-import PurchaseReceiptForm from "./pages/buying/PurchaseReceiptForm";
+import SupplierList from "@/pages/buying/SupplierList";
+import SupplierForm from "@/pages/buying/SupplierForm";
+import PurchaseOrderList from "@/pages/buying/PurchaseOrderList";
+import PurchaseOrderForm from "@/pages/buying/PurchaseOrderForm";
+import PurchaseReceiptList from "@/pages/buying/PurchaseReceiptList";
+import PurchaseReceiptForm from "@/pages/buying/PurchaseReceiptForm";
 
 // Stock
-import ItemList from "./pages/stock/ItemList";
-import ItemForm from "./pages/stock/ItemForm";
-import DeliveryNoteList from "./pages/stock/DeliveryNoteList";
-import DeliveryNoteForm from "./pages/stock/DeliveryNoteForm";
+import ItemList from "@/pages/stock/ItemList";
+import ItemForm from "@/pages/stock/ItemForm";
+import DeliveryNoteList from "@/pages/stock/DeliveryNoteList";
+import DeliveryNoteForm from "@/pages/stock/DeliveryNoteForm";
+import StockEntryList from "@/pages/stock/StockEntryList";
+import StockEntryForm from "@/pages/stock/StockEntryForm";
+import MaterialRequestList from "@/pages/stock/MaterialRequestList";
+import MaterialRequestForm from "@/pages/stock/MaterialRequestForm";
 
 // Accounts
-import SalesInvoiceList from "./pages/accounts/SalesInvoiceList";
-import SalesInvoiceForm from "./pages/accounts/SalesInvoiceForm";
-import JournalEntryList from "./pages/accounts/JournalEntryList";
-import JournalEntryForm from "./pages/accounts/JournalEntryForm";
-import PaymentEntryList from "./pages/accounts/PaymentEntryList";
-import PaymentEntryForm from "./pages/accounts/PaymentEntryForm";
-import PurchaseInvoiceList from "./pages/accounts/PurchaseInvoiceList";
-import PurchaseInvoiceForm from "./pages/accounts/PurchaseInvoiceForm";
+import SalesInvoiceList from "@/pages/accounts/SalesInvoiceList";
+import SalesInvoiceForm from "@/pages/accounts/SalesInvoiceForm";
+import JournalEntryList from "@/pages/accounts/JournalEntryList";
+import JournalEntryForm from "@/pages/accounts/JournalEntryForm";
+import PaymentEntryList from "@/pages/accounts/PaymentEntryList";
+import PaymentEntryForm from "@/pages/accounts/PaymentEntryForm";
+import PurchaseInvoiceList from "@/pages/accounts/PurchaseInvoiceList";
+import PurchaseInvoiceForm from "@/pages/accounts/PurchaseInvoiceForm";
 
 // CRM
-import LeadList from "./pages/crm/LeadList";
-import LeadForm from "./pages/crm/LeadForm";
-
-// Support
-import IssueList from "./pages/support/IssueList";
-import IssueForm from "./pages/support/IssueForm";
+import LeadList from "@/pages/crm/LeadList";
+import LeadForm from "@/pages/crm/LeadForm";
 
 // Projects
-import ProjectList from "./pages/projects/ProjectList";
-import ProjectForm from "./pages/projects/ProjectForm";
-
-// Setup
-import CompanyList from "./pages/setup/CompanyList";
-import CompanyForm from "./pages/setup/CompanyForm";
-
-// Remaining Stock
-import StockEntryList from "./pages/stock/StockEntryList";
-import StockEntryForm from "./pages/stock/StockEntryForm";
-import MaterialRequestList from "./pages/stock/MaterialRequestList";
-import MaterialRequestForm from "./pages/stock/MaterialRequestForm";
+import ProjectList from "@/pages/projects/ProjectList";
+import ProjectForm from "@/pages/projects/ProjectForm";
 
 // Manufacturing
-import WorkOrderList from "./pages/manufacturing/WorkOrderList";
-import WorkOrderForm from "./pages/manufacturing/WorkOrderForm";
-import JobCardList from "./pages/manufacturing/JobCardList";
-import JobCardForm from "./pages/manufacturing/JobCardForm";
+import WorkOrderList from "@/pages/manufacturing/WorkOrderList";
+import WorkOrderForm from "@/pages/manufacturing/WorkOrderForm";
+import JobCardList from "@/pages/manufacturing/JobCardList";
+import JobCardForm from "@/pages/manufacturing/JobCardForm";
 
 // Assets
-import AssetCategoryList from "./pages/assets/AssetCategoryList";
-import AssetCategoryForm from "./pages/assets/AssetCategoryForm";
-import AssetMovementList from "./pages/assets/AssetMovementList";
-import AssetMovementForm from "./pages/assets/AssetMovementForm";
+import AssetCategoryList from "@/pages/assets/AssetCategoryList";
+import AssetCategoryForm from "@/pages/assets/AssetCategoryForm";
+import AssetMovementList from "@/pages/assets/AssetMovementList";
+import AssetMovementForm from "@/pages/assets/AssetMovementForm";
+
+// Support
+import IssueList from "@/pages/support/IssueList";
+import IssueForm from "@/pages/support/IssueForm";
 
 // Maintenance
-import MaintenanceScheduleList from "./pages/maintenance/MaintenanceScheduleList";
-import MaintenanceScheduleForm from "./pages/maintenance/MaintenanceScheduleForm";
+import MaintenanceScheduleList from "@/pages/maintenance/MaintenanceScheduleList";
+import MaintenanceScheduleForm from "@/pages/maintenance/MaintenanceScheduleForm";
 
 // Quality Management
-import QualityInspectionList from "./pages/quality_management/QualityInspectionList";
-import QualityInspectionForm from "./pages/quality_management/QualityInspectionForm";
+import QualityInspectionList from "@/pages/quality_management/QualityInspectionList";
+import QualityInspectionForm from "@/pages/quality_management/QualityInspectionForm";
 
 // Subcontracting
-import SubcontractingReceiptList from "./pages/subcontracting/SubcontractingReceiptList";
-import SubcontractingReceiptForm from "./pages/subcontracting/SubcontractingReceiptForm";
+import SubcontractingReceiptList from "@/pages/subcontracting/SubcontractingReceiptList";
+import SubcontractingReceiptForm from "@/pages/subcontracting/SubcontractingReceiptForm";
 
-import Onboarding from "./pages/Onboarding";
-import Home from "./pages/Home";
+// Setup
+import CompanyList from "@/pages/setup/CompanyList";
+import CompanyForm from "@/pages/setup/CompanyForm";
+import UserList from "@/pages/setup/UserList";
+import UserForm from "@/pages/setup/UserForm";
 
-function App() {
+function ProtectedRoute() {
+    const { isAuthenticated } = useAuth();
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
+    }
+    return <Outlet />;
+}
+
+function AppLayout() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/onboarding" element={<Onboarding />} />
-
-                {/* Redirects */}
-                <Route path="/dashboard" element={<Navigate to="/app/dashboard" replace />} />
-
-                <Route path="/app" element={<Layout />}>
-                    <Route path="dashboard" element={<Dashboard />} />
-
-                    {/* Selling Module */}
-                    <Route path="selling">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/selling/customer" className="text-primary underline">Customer</Link>, <Link to="/app/selling/quotation" className="text-primary underline">Quotation</Link>, <Link to="/app/selling/sales-order" className="text-primary underline">Sales Order</Link></div>} />
-                        <Route path="customer" element={<CustomerList />} />
-                        <Route path="customer/new" element={<CustomerForm />} />
-                        <Route path="quotation" element={<QuotationList />} />
-                        <Route path="quotation/new" element={<QuotationForm />} />
-                        <Route path="sales-order" element={<SalesOrderList />} />
-                        <Route path="sales-order/new" element={<SalesOrderForm />} />
-                    </Route>
-
-                    {/* Buying Module */}
-                    <Route path="buying">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/buying/supplier" className="text-primary underline">Supplier</Link>, <Link to="/app/buying/purchase-order" className="text-primary underline">Purchase Order</Link>, <Link to="/app/buying/purchase-receipt" className="text-primary underline">Purchase Receipt</Link></div>} />
-                        <Route path="supplier" element={<SupplierList />} />
-                        <Route path="supplier/new" element={<SupplierForm />} />
-                        <Route path="purchase-order" element={<PurchaseOrderList />} />
-                        <Route path="purchase-order/new" element={<PurchaseOrderForm />} />
-                        <Route path="purchase-receipt" element={<PurchaseReceiptList />} />
-                        <Route path="purchase-receipt/new" element={<PurchaseReceiptForm />} />
-                    </Route>
-
-                    {/* Stock Module */}
-                    <Route path="stock">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/stock/item" className="text-primary underline">Item</Link>, <Link to="/app/stock/delivery-note" className="text-primary underline">Delivery Note</Link>, <Link to="/app/stock/stock-entry" className="text-primary underline">Stock Entry</Link>, <Link to="/app/stock/material-request" className="text-primary underline">Material Request</Link></div>} />
-                        <Route path="item" element={<ItemList />} />
-                        <Route path="item/new" element={<ItemForm />} />
-                        <Route path="delivery-note" element={<DeliveryNoteList />} />
-                        <Route path="delivery-note/new" element={<DeliveryNoteForm />} />
-                        <Route path="stock-entry" element={<StockEntryList />} />
-                        <Route path="stock-entry/new" element={<StockEntryForm />} />
-                        <Route path="material-request" element={<MaterialRequestList />} />
-                        <Route path="material-request/new" element={<MaterialRequestForm />} />
-                    </Route>
-
-                    {/* Accounts Module */}
-                    <Route path="accounts">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/accounts/sales-invoice" className="text-primary underline">Sales Invoice</Link>, <Link to="/app/accounts/purchase-invoice" className="text-primary underline">Purchase Invoice</Link>, <Link to="/app/accounts/journal-entry" className="text-primary underline">Journal Entry</Link>, <Link to="/app/accounts/payment-entry" className="text-primary underline">Payment Entry</Link></div>} />
-                        <Route path="sales-invoice" element={<SalesInvoiceList />} />
-                        <Route path="sales-invoice/new" element={<SalesInvoiceForm />} />
-                        <Route path="purchase-invoice" element={<PurchaseInvoiceList />} />
-                        <Route path="purchase-invoice/new" element={<PurchaseInvoiceForm />} />
-                        <Route path="journal-entry" element={<JournalEntryList />} />
-                        <Route path="journal-entry/new" element={<JournalEntryForm />} />
-                        <Route path="payment-entry" element={<PaymentEntryList />} />
-                        <Route path="payment-entry/new" element={<PaymentEntryForm />} />
-                    </Route>
-
-                    {/* CRM Module */}
-                    <Route path="crm">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/crm/lead" className="text-primary underline">Lead</Link></div>} />
-                        <Route path="lead" element={<LeadList />} />
-                        <Route path="lead/new" element={<LeadForm />} />
-                    </Route>
-
-                    {/* Projects Module */}
-                    <Route path="projects">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/projects/project" className="text-primary underline">Project</Link></div>} />
-                        <Route path="project" element={<ProjectList />} />
-                        <Route path="project/new" element={<ProjectForm />} />
-                    </Route>
-
-                    {/* Manufacturing Module */}
-                    <Route path="manufacturing">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/manufacturing/work-order" className="text-primary underline">Work Order</Link>, <Link to="/app/manufacturing/job-card" className="text-primary underline">Job Card</Link></div>} />
-                        <Route path="work-order" element={<WorkOrderList />} />
-                        <Route path="work-order/new" element={<WorkOrderForm />} />
-                        <Route path="job-card" element={<JobCardList />} />
-                        <Route path="job-card/new" element={<JobCardForm />} />
-                    </Route>
-
-                    {/* Assets Module */}
-                    <Route path="assets">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/assets/asset" className="text-primary underline">Asset</Link>, <Link to="/app/assets/asset-category" className="text-primary underline">Asset Category</Link>, <Link to="/app/assets/asset-movement" className="text-primary underline">Asset Movement</Link></div>} />
-                        <Route path="asset" element={<div>Asset List (Placeholder)</div>} />
-                        <Route path="asset-category" element={<AssetCategoryList />} />
-                        <Route path="asset-category/new" element={<AssetCategoryForm />} />
-                        <Route path="asset-movement" element={<AssetMovementList />} />
-                        <Route path="asset-movement/new" element={<AssetMovementForm />} />
-                    </Route>
-
-                    {/* Maintenance Module */}
-                    <Route path="maintenance">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/maintenance/maintenance-schedule" className="text-primary underline">Maintenance Schedule</Link></div>} />
-                        <Route path="maintenance-schedule" element={<MaintenanceScheduleList />} />
-                        <Route path="maintenance-schedule/new" element={<MaintenanceScheduleForm />} />
-                    </Route>
-
-                    {/* Support Module */}
-                    <Route path="support">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/support/issue" className="text-primary underline">Issue</Link></div>} />
-                        <Route path="issue" element={<IssueList />} />
-                        <Route path="issue/new" element={<IssueForm />} />
-                    </Route>
-
-                    {/* Quality Management Module */}
-                    <Route path="quality-management">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/quality-management/quality-goal" className="text-primary underline">Quality Goal</Link>, <Link to="/app/quality-management/quality-inspection" className="text-primary underline">Quality Inspection</Link></div>} />
-                        <Route path="quality-goal" element={<div>Quality Goal List (Placeholder)</div>} />
-                        <Route path="quality-inspection" element={<QualityInspectionList />} />
-                        <Route path="quality-inspection/new" element={<QualityInspectionForm />} />
-                    </Route>
-
-                    {/* Subcontracting Module */}
-                    <Route path="subcontracting">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/subcontracting/subcontracting-order" className="text-primary underline">Subcontracting Order</Link>, <Link to="/app/subcontracting/subcontracting-receipt" className="text-primary underline">Subcontracting Receipt</Link></div>} />
-                        <Route path="subcontracting-order" element={<div>Subcontracting Order List (Placeholder)</div>} />
-                        <Route path="subcontracting-receipt" element={<SubcontractingReceiptList />} />
-                        <Route path="subcontracting-receipt/new" element={<SubcontractingReceiptForm />} />
-                    </Route>
-
-                    {/* Setup Module */}
-                    <Route path="setup">
-                        <Route index element={<div className="p-4">Select a DocType: <Link to="/app/setup/company" className="text-primary underline">Company</Link></div>} />
-                        <Route path="company" element={<CompanyList />} />
-                        <Route path="company/new" element={<CompanyForm />} />
-                    </Route>
-                </Route>
-
-                {/* 404 Route */}
-                <Route path="*" element={<div className="flex items-center justify-center h-screen">
-                    <div className="text-center">
-                        <h1 className="text-4xl font-bold mb-4">404</h1>
-                        <p className="text-xl mb-4">Page Not Found</p>
-                        <a href="/" className="text-primary underline">Go Home</a>
-                    </div>
-                </div>} />
-            </Routes>
-        </Router>
+        <div className="flex h-screen bg-background">
+            <Sidebar />
+            <main className="flex-1 overflow-y-auto p-8">
+                <Outlet />
+            </main>
+        </div>
     );
 }
 
-export default App;
+export default function App() {
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/app" element={<AppLayout />}>
+                            <Route index element={<Navigate to="/app/dashboard" replace />} />
+                            <Route path="dashboard" element={<Dashboard />} />
+
+                            {/* Core */}
+                            <Route path="core/todo" element={<div className="p-4">ToDo List (Coming Soon)</div>} />
+                            <Route path="core/onboarding" element={<OnboardingWizard />} />
+
+                            {/* Selling */}
+                            <Route path="selling/customer" element={<CustomerList />} />
+                            <Route path="selling/customer/new" element={<CustomerForm />} />
+                            <Route path="selling/sales-order" element={<SalesOrderList />} />
+                            <Route path="selling/sales-order/new" element={<SalesOrderForm />} />
+                            <Route path="selling/quotation" element={<QuotationList />} />
+                            <Route path="selling/quotation/new" element={<QuotationForm />} />
+
+                            {/* Buying */}
+                            <Route path="buying/supplier" element={<SupplierList />} />
+                            <Route path="buying/supplier/new" element={<SupplierForm />} />
+                            <Route path="buying/purchase-order" element={<PurchaseOrderList />} />
+                            <Route path="buying/purchase-order/new" element={<PurchaseOrderForm />} />
+                            <Route path="buying/purchase-receipt" element={<PurchaseReceiptList />} />
+                            <Route path="buying/purchase-receipt/new" element={<PurchaseReceiptForm />} />
+
+                            {/* Stock */}
+                            <Route path="stock/item" element={<ItemList />} />
+                            <Route path="stock/item/new" element={<ItemForm />} />
+                            <Route path="stock/stock-entry" element={<StockEntryList />} />
+                            <Route path="stock/stock-entry/new" element={<StockEntryForm />} />
+                            <Route path="stock/delivery-note" element={<DeliveryNoteList />} />
+                            <Route path="stock/delivery-note/new" element={<DeliveryNoteForm />} />
+                            <Route path="stock/material-request" element={<MaterialRequestList />} />
+                            <Route path="stock/material-request/new" element={<MaterialRequestForm />} />
+
+                            {/* Accounts */}
+                            <Route path="accounts/sales-invoice" element={<SalesInvoiceList />} />
+                            <Route path="accounts/sales-invoice/new" element={<SalesInvoiceForm />} />
+                            <Route path="accounts/purchase-invoice" element={<PurchaseInvoiceList />} />
+                            <Route path="accounts/purchase-invoice/new" element={<PurchaseInvoiceForm />} />
+                            <Route path="accounts/journal-entry" element={<JournalEntryList />} />
+                            <Route path="accounts/journal-entry/new" element={<JournalEntryForm />} />
+                            <Route path="accounts/payment-entry" element={<PaymentEntryList />} />
+                            <Route path="accounts/payment-entry/new" element={<PaymentEntryForm />} />
+
+                            {/* Projects */}
+                            <Route path="projects/project" element={<ProjectList />} />
+                            <Route path="projects/project/new" element={<ProjectForm />} />
+
+                            {/* CRM */}
+                            <Route path="crm/lead" element={<LeadList />} />
+                            <Route path="crm/lead/new" element={<LeadForm />} />
+
+                            {/* Manufacturing */}
+                            <Route path="manufacturing/work-order" element={<WorkOrderList />} />
+                            <Route path="manufacturing/work-order/new" element={<WorkOrderForm />} />
+                            <Route path="manufacturing/job-card" element={<JobCardList />} />
+                            <Route path="manufacturing/job-card/new" element={<JobCardForm />} />
+
+                            {/* Assets */}
+                            <Route path="assets/asset" element={<div className="p-4">Asset List (Coming Soon)</div>} />
+                            <Route path="assets/asset-category" element={<AssetCategoryList />} />
+                            <Route path="assets/asset-category/new" element={<AssetCategoryForm />} />
+                            <Route path="assets/asset-movement" element={<AssetMovementList />} />
+                            <Route path="assets/asset-movement/new" element={<AssetMovementForm />} />
+
+                            {/* Support */}
+                            <Route path="support/issue" element={<IssueList />} />
+                            <Route path="support/issue/new" element={<IssueForm />} />
+
+                            {/* Maintenance */}
+                            <Route path="maintenance/maintenance-visit" element={<div className="p-4">Maintenance Visit List (Coming Soon)</div>} />
+                            <Route path="maintenance/maintenance-schedule" element={<MaintenanceScheduleList />} />
+                            <Route path="maintenance/maintenance-schedule/new" element={<MaintenanceScheduleForm />} />
+
+                            {/* Quality Management */}
+                            <Route path="quality-management/quality-goal" element={<div className="p-4">Quality Goal List (Coming Soon)</div>} />
+                            <Route path="quality-management/quality-inspection" element={<QualityInspectionList />} />
+                            <Route path="quality-management/quality-inspection/new" element={<QualityInspectionForm />} />
+
+                            {/* Subcontracting */}
+                            <Route path="subcontracting/subcontracting-order" element={<div className="p-4">Subcontracting Order List (Coming Soon)</div>} />
+                            <Route path="subcontracting/subcontracting-receipt" element={<SubcontractingReceiptList />} />
+                            <Route path="subcontracting/subcontracting-receipt/new" element={<SubcontractingReceiptForm />} />
+
+                            {/* Setup */}
+                            <Route path="setup/company" element={<CompanyList />} />
+                            <Route path="setup/company/new" element={<CompanyForm />} />
+                            <Route path="setup/users" element={<UserList />} />
+                            <Route path="setup/users/new" element={<UserForm />} />
+                            <Route path="setup/users/:id" element={<UserForm />} />
+                        </Route>
+                    </Route>
+
+                    {/* Redirect root to /app */}
+                    <Route path="/" element={<Navigate to="/app" replace />} />
+
+                    {/* 404 */}
+                    <Route path="*" element={<div className="p-8">404 - Page Not Found</div>} />
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    );
+}

@@ -17,10 +17,11 @@ interface ListViewProps {
     module: string;
     doctype: string;
     title: string;
-    columns: { key: string; label: string }[];
+    columns: { key: string; label: string; render?: (value: any, row: any) => React.ReactNode }[];
+    linkPath?: string; // Optional override for "New" button
 }
 
-export function ListView({ module, doctype, title, columns }: ListViewProps) {
+export function ListView({ module, doctype, title, columns, linkPath }: ListViewProps) {
     const [data, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
@@ -39,7 +40,7 @@ export function ListView({ module, doctype, title, columns }: ListViewProps) {
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">{t(title)}</h2>
                 <Button asChild>
-                    <Link to="new">
+                    <Link to={linkPath || "new"}>
                         <Plus className="mr-2 h-4 w-4" /> {t('common.new')} {t(title)}
                     </Link>
                 </Button>
@@ -65,7 +66,9 @@ export function ListView({ module, doctype, title, columns }: ListViewProps) {
                             data.map((row, i) => (
                                 <TableRow key={row.name || i}>
                                     {columns.map((col) => (
-                                        <TableCell key={col.key}>{row[col.key]}</TableCell>
+                                        <TableCell key={col.key}>
+                                            {col.render ? col.render(row[col.key], row) : row[col.key]}
+                                        </TableCell>
                                     ))}
                                 </TableRow>
                             ))

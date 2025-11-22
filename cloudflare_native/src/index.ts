@@ -1,5 +1,8 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { jwt } from 'hono/jwt';
+import { authRouter } from './modules/core/auth';
+import userRouter from './modules/core/user';
 import todoRouter from './modules/core/todo';
 import onboardingRouter from './modules/core/onboarding_step';
 import customerRouter from './modules/selling/customer';
@@ -35,7 +38,7 @@ import purchaseInvoiceRouter from './modules/accounts/purchase_invoice';
 import paymentEntryRouter from './modules/accounts/payment_entry';
 import materialRequestRouter from './modules/stock/material_request';
 
-type Bindings = {
+export type Bindings = {
     DB: D1Database;
     JOBS_QUEUE: Queue;
 };
@@ -51,7 +54,18 @@ app.use('/api/*', cors({
     maxAge: 600,
 }));
 
+// JWT Middleware
+app.use('/api/*', (c, next) => {
+    const jwtMiddleware = jwt({ secret: 'YOUR_SECRET_KEY' });
+    if (c.req.method === 'OPTIONS' || c.req.path.startsWith('/api/auth') || c.req.path.startsWith('/api/portal')) {
+        return next();
+    }
+    return jwtMiddleware(c, next);
+});
+
 // Mount Modules
+app.route('/api/auth', authRouter);
+app.route('/api/core/user', userRouter);
 app.route('/api/core/todo', todoRouter);
 app.route('/api/core/onboarding-step', onboardingRouter);
 app.route('/api/selling/customer', customerRouter);
