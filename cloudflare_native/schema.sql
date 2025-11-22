@@ -12,6 +12,18 @@ CREATE TABLE ToDo (
     allocated_to TEXT
 );
 
+-- Core: User
+DROP TABLE IF EXISTS User;
+CREATE TABLE User (
+    email TEXT PRIMARY KEY,
+    creation TEXT DEFAULT (datetime('now')),
+    modified TEXT DEFAULT (datetime('now')),
+    full_name TEXT,
+    password_hash TEXT,
+    role TEXT DEFAULT 'User',
+    enabled INTEGER DEFAULT 1
+);
+
 -- Selling: Customer
 DROP TABLE IF EXISTS Customer;
 CREATE TABLE Customer (
